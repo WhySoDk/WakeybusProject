@@ -98,21 +98,152 @@ class _SearchBarAppState extends State<SearchBarApp> {
     return Column(
       children: [
         SizedBox(
-            height: 80.0,
+          height: 80.0,
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            body: Padding(
+              padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 0.0),
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Row(
+                  children: [
+                    const Spacer(),
+                    Container(
+                      width: 50,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.2),
+                            spreadRadius: 0,
+                            blurRadius: 3,
+                            offset: const Offset(3, 4),
+                          ),
+                        ],
+                      ),
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          padding: MaterialStateProperty.all(EdgeInsets.zero),
+                          shape: MaterialStateProperty.all(CircleBorder()),
+                          backgroundColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+                            return const Color(0xFF1E3643); // Button color
+                          }),
+                        ),
+                        onPressed: () {
+                          Navigator.pushNamed(context, "/Setting", arguments: 'Thanat');
+                        },
+                        child: Icon(
+                          Icons.settings,
+                          color: Theme.of(context).colorScheme.surface,
+                          size: 27.0,
+                        ),
+                      ),
+                    ),
+                    const Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15.0, right: 0.0, top: 0.0),
+                      child: SizedBox(
+                        width: 380,
+                        height: 50,
+                        child: SearchAnchor(
+                          builder: (BuildContext context, SearchController controller) {
+                            return SearchBar(
+                              controller: controller,
+                              padding:
+                                  const MaterialStatePropertyAll<EdgeInsets>(EdgeInsets.symmetric(horizontal: 16.0)),
+                              onTap: () {
+                                controller.openView();
+                              },
+                              onChanged: (_) {
+                                controller.openView();
+                              },
+                              leading: const Icon(Icons.search), // Search Icon
+                            );
+                          },
+                          suggestionsBuilder: (BuildContext context, SearchController controller) {
+                            return List<ListTile>.generate(
+                              5,
+                              (int index) {
+                                final String item = 'item $index';
+                                return ListTile(
+                                  title: Text(item),
+                                  onTap: () {
+                                    setState(
+                                      () {
+                                        controller.closeView(item);
+                                      },
+                                    );
+                                  },
+                                );
+                              },
+                            );
+                          },
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+        Align(
+          alignment: Alignment.topRight,
+          child: SizedBox(
+            height: 350.0,
+            width: 75,
             child: Scaffold(
               backgroundColor: Colors.transparent,
               body: Padding(
-                padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 0.0),
+                padding: const EdgeInsets.only(left: 0.0, right: 15.0, top: 15.0),
                 child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Row(
-                      children: [
-                        const Spacer(),
-                        Container(
-                          width: 50,
-                          height: 50,
+                  alignment: Alignment.topRight,
+                  child: Column(
+                    children: [
+                      Container(
+                        width: 55,
+                        height: 55,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                              spreadRadius: 0,
+                              blurRadius: 3,
+                              offset: const Offset(3, 4),
+                            ),
+                          ],
+                        ),
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            padding: MaterialStateProperty.all(EdgeInsets.zero),
+                            shape: MaterialStateProperty.all(const CircleBorder()),
+                            backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+                              (Set<MaterialState> states) {
+                                return Theme.of(context).colorScheme.surface; // Button color
+                              },
+                            ), // Background color
+                          ),
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/Setting", arguments: 'Thanat');
+                          },
+                          child: const Icon(
+                            Icons.location_on_sharp,
+                            color: Colors.redAccent,
+                            size: 40.0,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 0.0, right: 0.0, top: 15.0),
+                        child: Container(
+                          width: 100.0,
+                          height: 250.0,
                           decoration: BoxDecoration(
-                            shape: BoxShape.circle,
+                            color: Theme.of(context).colorScheme.surface,
+                            shape: BoxShape.rectangle,
+                            borderRadius: const BorderRadius.all(Radius.circular(30)),
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.black.withOpacity(0.2),
@@ -122,136 +253,14 @@ class _SearchBarAppState extends State<SearchBarApp> {
                               ),
                             ],
                           ),
-                          child: ElevatedButton(
-                            style: ButtonStyle(
-                              padding: MaterialStateProperty.all(EdgeInsets.zero),
-                              shape: MaterialStateProperty.all(CircleBorder()),
-                              backgroundColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
-                                return const Color(0xFF1E3643); // Button color
-                              }),
-                            ),
-                            onPressed: () {
-                              Navigator.pushNamed(context, "/Setting", arguments: 'Thanat');
-                            },
-                            child: Icon(
-                              Icons.settings,
-                              color: Theme.of(context).colorScheme.surface,
-                              size: 27.0,
-                            ),
-                          ),
                         ),
-                        const Spacer(),
-                        Padding(
-                            padding: const EdgeInsets.only(left: 15.0, right: 0.0, top: 0.0),
-                            child: SizedBox(
-                              width: 380,
-                              height: 50,
-                              child: SearchAnchor(
-                                builder: (BuildContext context, SearchController controller) {
-                                  return SearchBar(
-                                    controller: controller,
-                                    padding: const MaterialStatePropertyAll<EdgeInsets>(
-                                        EdgeInsets.symmetric(horizontal: 16.0)),
-                                    onTap: () {
-                                      controller.openView();
-                                    },
-                                    onChanged: (_) {
-                                      controller.openView();
-                                    },
-                                    leading: const Icon(Icons.search), // Search Icon
-                                  );
-                                },
-                                suggestionsBuilder: (BuildContext context, SearchController controller) {
-                                  return List<ListTile>.generate(5, (int index) {
-                                    final String item = 'item $index';
-                                    return ListTile(
-                                      title: Text(item),
-                                      onTap: () {
-                                        setState(() {
-                                          controller.closeView(item);
-                                        });
-                                      },
-                                    );
-                                  });
-                                },
-                              ),
-                            ))
-                      ],
-                    )),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-            )),
-        Align(
-          alignment: Alignment.topRight,
-          child: SizedBox(
-              height: 350.0,
-              width: 75,
-              child: Scaffold(
-                  backgroundColor: Colors.transparent,
-                  body: Padding(
-                      padding: const EdgeInsets.only(left: 0.0, right: 15.0, top: 15.0),
-                      child: Align(
-                          alignment: Alignment.topRight,
-                          child: Column(
-                            children: [
-                              Container(
-                                width: 55,
-                                height: 55,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.2),
-                                      spreadRadius: 0,
-                                      blurRadius: 3,
-                                      offset: const Offset(3, 4),
-                                    ),
-                                  ],
-                                ),
-                                child: ElevatedButton(
-                                  style: ButtonStyle(
-                                    padding: MaterialStateProperty.all(EdgeInsets.zero),
-                                    shape: MaterialStateProperty.all(const CircleBorder()),
-                                    backgroundColor: MaterialStateProperty.resolveWith<Color?>(
-                                      (Set<MaterialState> states) {
-                                        return Theme.of(context).colorScheme.surface; // Button color
-                                      },
-                                    ), // Background color
-                                  ),
-                                  onPressed: () {
-                                    Navigator.pushNamed(context, "/Setting", arguments: 'Thanat');
-                                  },
-                                  child: const Icon(
-                                    Icons.location_on_sharp,
-                                    color: Colors.redAccent,
-                                    size: 40.0,
-                                  ),
-                                ),
-                              ),
-
-                              Padding(
-                                  padding: const EdgeInsets.only(left: 0.0, right: 0.0, top: 15.0),
-                                  child: Container(
-                                    width: 100.0,
-                                    height: 250.0,
-                                    decoration: BoxDecoration(
-                                      color: Theme.of(context).colorScheme.surface,
-                                      shape: BoxShape.rectangle,
-                                      borderRadius: const BorderRadius.all(Radius.circular(30)),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.black.withOpacity(0.2),
-                                          spreadRadius: 0,
-                                          blurRadius: 3,
-                                          offset: const Offset(3, 4),
-                                        ),
-                                      ],
-                                    ),
-                                  ))
-                              // Scaffold(
-                              //     backgroundColor: Colors.blueGrey
-                              // )
-                            ],
-                          ))))),
+            ),
+          ),
         )
       ],
     );
