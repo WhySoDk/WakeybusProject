@@ -236,46 +236,47 @@ class _SearchBarAppState extends State<SearchBarApp> {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 0.0, right: 0.0, top: 25.0),
-                        child: Container(
-                          width: 55,
-                          height: 250.0,
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.surface,
-                            shape: BoxShape.rectangle,
-                            borderRadius: const BorderRadius.all(Radius.circular(30)),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.2),
-                                spreadRadius: 0,
-                                blurRadius: 3,
-                                offset: const Offset(3, 4),
-                              ),
-                            ],
-                          ),
-                          child: Column(
-                            children: [
-                              const Spacer(),
-                              IconButton(
-                                icon: const Icon(Icons.add_alarm_rounded, color: Color(0xFF1E3643), size: 35.0),
-                                onPressed: () {},
-                              ),
-                              const Spacer(),
-                              IconButton(
-                                icon: const Icon(Icons.list_alt_rounded, color: Color(0xFF1E3643), size: 35.0),
-                                onPressed: () {},
-                              ),
-                              const Spacer(),
-                              IconButton(
-                                icon: const Icon(Icons.history_rounded, color: Color(0xFF1E3643), size: 35.0),
-                                onPressed: () {},
-                              ),
-                              const Spacer(),
-                            ],
-                          ),
-                        ),
-                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(left: 0.0, right: 0.0, top: 25.0),
+                      //   child: Container(
+                      //     width: 55,
+                      //     height: 250.0,
+                      //     decoration: BoxDecoration(
+                      //       color: Theme.of(context).colorScheme.surface,
+                      //       shape: BoxShape.rectangle,
+                      //       borderRadius: const BorderRadius.all(Radius.circular(30)),
+                      //       boxShadow: [
+                      //         BoxShadow(
+                      //           color: Colors.black.withOpacity(0.2),
+                      //           spreadRadius: 0,
+                      //           blurRadius: 3,
+                      //           offset: const Offset(3, 4),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //     child: Column(
+                      //       children: [
+                      //         const Spacer(),
+                      //         IconButton(
+                      //           icon: const Icon(Icons.add_alarm_rounded, color: Color(0xFF1E3643), size: 35.0),
+                      //           onPressed: () {},
+                      //         ),
+                      //         const Spacer(),
+                      //         IconButton(
+                      //           icon: const Icon(Icons.list_alt_rounded, color: Color(0xFF1E3643), size: 35.0),
+                      //           onPressed: () {},
+                      //         ),
+                      //         const Spacer(),
+                      //         IconButton(
+                      //           icon: const Icon(Icons.history_rounded, color: Color(0xFF1E3643), size: 35.0),
+                      //           onPressed: () {},
+                      //         ),
+                      //         const Spacer(),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
+                      Penal(),
                     ],
                   ),
                 ),
@@ -286,6 +287,319 @@ class _SearchBarAppState extends State<SearchBarApp> {
       ],
     ),
 
+    );
+  }
+}
+
+class Penal extends StatefulWidget {
+  const Penal({super.key});
+
+  @override
+  State<Penal> createState() => _Penal();
+}
+
+class _Penal extends State<Penal> {
+  Color _iconButtonColor1 = Colors.black;
+  Color _iconButtonColor2 = Colors.black;
+  Color _iconButtonColor3 = Colors.black;
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+        child: Stack(children: [
+          Align(
+            alignment: const AlignmentDirectional(1, -0.5),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 0.0, right: 0.0, top: 25.0),
+              child: Container(
+                width: 55,
+                height: 250,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: const [
+                    BoxShadow(
+                      blurRadius: 2,
+                      color: Color(0x33000000),
+                      offset: Offset(0, 4),
+                      spreadRadius: 0,
+                    )
+                  ],
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.add_alarm, size: 35.0),
+                      color: _iconButtonColor1,
+                      onPressed: () {
+                        setState(() {
+                          _iconButtonColor1 = _iconButtonColor1 == Colors.black
+                              ? Colors.orange
+                              : Colors.black;
+                          _iconButtonColor2 = Colors.black;
+                          _iconButtonColor3 = Colors.black;
+                        });
+                      },
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.add_chart, size: 35.0),
+                      color: _iconButtonColor2,
+                      onPressed: () {
+                        setState(() {
+                          _iconButtonColor2 = _iconButtonColor2 == Colors.black
+                              ? Colors.orange
+                              : Colors.black;
+                          _iconButtonColor1 = Colors.black;
+                          _iconButtonColor3 = Colors.black;
+                        });
+                      },
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.history, size: 35.0),
+                      color: _iconButtonColor3,
+                      onPressed: () {
+                        setState(() {
+                          _iconButtonColor3 = _iconButtonColor3 == Colors.black
+                              ? Colors.orange
+                              : Colors.black;
+                          _iconButtonColor1 = Colors.black;
+                          _iconButtonColor2 = Colors.black;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ]));
+  }
+}
+
+class ListOfStop extends StatefulWidget {
+  const ListOfStop({super.key});
+
+  @override
+  State<ListOfStop> createState() => _ListOfStopState();
+}
+
+class _ListOfStopState extends State<ListOfStop> {
+  bool switchValue1 = true;
+  bool switchValue2 = true;
+  bool switchValue3 = true;
+  bool switchValue4 = true;
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      child: Align(
+        alignment: const AlignmentDirectional(0.0, 1.0),
+        child: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 15),
+          child: Container(
+            width: 350,
+            height: 333,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: const [
+                BoxShadow(
+                  blurRadius: 2,
+                  color: Color(0x33000000),
+                  offset: Offset(4, 4),
+                  spreadRadius: 0,
+                )
+              ],
+              borderRadius: BorderRadius.circular(50),
+            ),
+            //padding: EdgeInsetsDirectional.fromSTEB(0,0, 0, 12),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Align(
+                  alignment: AlignmentDirectional(0, -1),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 12),
+                    child: Text(
+                      'Stop list',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: 'Plus Jakarta Sans',
+                        color: Color(0xFF57636C),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(24, 0, 0, 0),
+                        child: Icon(
+                          Icons.signpost_rounded,
+                          color: Color(0xFF57636C),
+                          size: 24,
+                        ),
+                      ),
+                      const Text(
+                        'Mahidol, Salaya.',
+                        style: TextStyle(fontWeight: FontWeight.w500),
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 20, 0),
+                        child: Switch.adaptive(
+                          value: switchValue1,
+                          onChanged: (newValue) async {
+                            setState(() => switchValue1 = newValue);
+                          },
+                          activeColor: Colors.white,
+                          activeTrackColor: Color(0xFFB4D4FF),
+                          inactiveTrackColor: Colors.grey,
+                          inactiveThumbColor: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  width: 300,
+                  child: Divider(
+                    height: 1,
+                    thickness: 1,
+                    color: Colors.grey,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
+                        child: Icon(
+                          Icons.signpost_rounded,
+                          color: Color(0xFF57636C),
+                          size: 24,
+                        ),
+                      ),
+                      const Text(
+                        'Mahidol, Salaya.',
+                        style: TextStyle(fontWeight: FontWeight.w500),
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 20, 0),
+                        child: Switch.adaptive(
+                          value: switchValue2,
+                          onChanged: (newValue) async {
+                            setState(() => switchValue2 = newValue);
+                          },
+                          activeColor: Colors.white,
+                          activeTrackColor: Color(0xFFB4D4FF),
+                          inactiveTrackColor: Colors.grey,
+                          inactiveThumbColor: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  width: 300,
+                  child: Divider(
+                    height: 1,
+                    thickness: 1,
+                    color: Colors.grey,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
+                        child: Icon(
+                          Icons.signpost_rounded,
+                          color: Color(0xFF57636C),
+                          size: 24,
+                        ),
+                      ),
+                      const Text(
+                        'Mahidol, Salaya.',
+                        style: TextStyle(fontWeight: FontWeight.w500),
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 20, 0),
+                        child: Switch.adaptive(
+                          value: switchValue3,
+                          onChanged: (newValue) async {
+                            setState(() => switchValue3 = newValue);
+                          },
+                          activeColor: Colors.white,
+                          activeTrackColor: Color(0xFFB4D4FF),
+                          inactiveTrackColor: Colors.grey,
+                          inactiveThumbColor: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  width: 300,
+                  child: Divider(
+                    height: 1,
+                    thickness: 1,
+                    color: Colors.grey,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
+                        child: Icon(
+                          Icons.signpost_rounded,
+                          color: Color(0xFF57636C),
+                          size: 24,
+                        ),
+                      ),
+                      const Align(
+                        alignment: AlignmentDirectional(0, 0),
+                        child: Text(
+                          'Mahidol, Salaya.',
+                          style: TextStyle(fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 20, 0),
+                        child: Switch.adaptive(
+                          value: switchValue4,
+                          onChanged: (newValue) async {
+                            setState(() => switchValue4 = newValue);
+                          },
+                          activeColor: Colors.white,
+                          activeTrackColor: Color(0xFFB4D4FF),
+                          inactiveTrackColor: Colors.grey,
+                          inactiveThumbColor: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
