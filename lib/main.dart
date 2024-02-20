@@ -95,10 +95,11 @@ class SearchBarApp extends StatefulWidget {
 class _SearchBarAppState extends State<SearchBarApp> {
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return SafeArea(
+        child: Column(
       children: [
         SizedBox(
-          height: 80.0,
+          height: 65.0,
           child: Scaffold(
             backgroundColor: Colors.transparent,
             body: Padding(
@@ -238,7 +239,7 @@ class _SearchBarAppState extends State<SearchBarApp> {
                       Padding(
                         padding: const EdgeInsets.only(left: 0.0, right: 0.0, top: 25.0),
                         child: Container(
-                          width: 100.0,
+                          width: 55,
                           height: 250.0,
                           decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.surface,
@@ -255,20 +256,24 @@ class _SearchBarAppState extends State<SearchBarApp> {
                           ),
                           child: Column(
                             children: [
-                              Spacer(),
-                              Icon(
-                                Icons.my_location,
-                                color: Color(0xFF1E3643),
-                                size: 25.0,
-
+                              const Spacer(),
+                              IconButton(
+                                icon: const Icon(Icons.add_alarm_rounded, color: Color(0xFF1E3643), size: 35.0),
+                                onPressed: () {},
                               ),
-                              Spacer(),
-                              Text("HII"),
-                              Spacer(),
-                              Text("HII"),
-                              Spacer(),
+                              const Spacer(),
+                              IconButton(
+                                icon: const Icon(Icons.list_alt_rounded, color: Color(0xFF1E3643), size: 35.0),
+                                onPressed: () {},
+                              ),
+                              const Spacer(),
+                              IconButton(
+                                icon: const Icon(Icons.history_rounded, color: Color(0xFF1E3643), size: 35.0),
+                                onPressed: () {},
+                              ),
+                              const Spacer(),
                             ],
-                          )
+                          ),
                         ),
                       ),
                     ],
@@ -279,6 +284,8 @@ class _SearchBarAppState extends State<SearchBarApp> {
           ),
         )
       ],
+    ),
+
     );
   }
 }
@@ -295,7 +302,7 @@ class MapSampleState extends State<MapSample> {
 
   static const CameraPosition MUICT = CameraPosition(
     target: LatLng(13.79465063169504, 100.3247490794993),
-    zoom: 19,
+    zoom: 15.5,
   );
 
   @override
