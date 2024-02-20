@@ -144,7 +144,7 @@ class _SearchBarAppState extends State<SearchBarApp> {
                     Padding(
                       padding: const EdgeInsets.only(left: 15.0, right: 0.0, top: 0.0),
                       child: SizedBox(
-                        width: 380,
+                        width: 300,
                         height: 50,
                         child: SearchAnchor(
                           builder: (BuildContext context, SearchController controller) {
@@ -196,14 +196,14 @@ class _SearchBarAppState extends State<SearchBarApp> {
             child: Scaffold(
               backgroundColor: Colors.transparent,
               body: Padding(
-                padding: const EdgeInsets.only(left: 0.0, right: 15.0, top: 15.0),
+                padding: const EdgeInsets.only(left: 0.0, right: 15.0, top: 25.0),
                 child: Align(
                   alignment: Alignment.topRight,
                   child: Column(
                     children: [
                       Container(
-                        width: 55,
-                        height: 55,
+                        width: 45,
+                        height: 45,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           boxShadow: [
@@ -221,7 +221,7 @@ class _SearchBarAppState extends State<SearchBarApp> {
                             shape: MaterialStateProperty.all(const CircleBorder()),
                             backgroundColor: MaterialStateProperty.resolveWith<Color?>(
                               (Set<MaterialState> states) {
-                                return Theme.of(context).colorScheme.surface; // Button color
+                                return Theme.of(context).colorScheme.surface;
                               },
                             ), // Background color
                           ),
@@ -229,14 +229,14 @@ class _SearchBarAppState extends State<SearchBarApp> {
                             Navigator.pushNamed(context, "/Setting", arguments: 'Thanat');
                           },
                           child: const Icon(
-                            Icons.location_on_sharp,
-                            color: Colors.redAccent,
-                            size: 40.0,
+                            Icons.my_location,
+                            color: Color(0xFF1E3643),
+                            size: 25.0,
                           ),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 0.0, right: 0.0, top: 15.0),
+                        padding: const EdgeInsets.only(left: 0.0, right: 0.0, top: 25.0),
                         child: Container(
                           width: 100.0,
                           height: 250.0,
@@ -253,6 +253,22 @@ class _SearchBarAppState extends State<SearchBarApp> {
                               ),
                             ],
                           ),
+                          child: Column(
+                            children: [
+                              Spacer(),
+                              Icon(
+                                Icons.my_location,
+                                color: Color(0xFF1E3643),
+                                size: 25.0,
+
+                              ),
+                              Spacer(),
+                              Text("HII"),
+                              Spacer(),
+                              Text("HII"),
+                              Spacer(),
+                            ],
+                          )
                         ),
                       ),
                     ],
