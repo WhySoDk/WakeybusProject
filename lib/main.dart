@@ -236,46 +236,6 @@ class _SearchBarAppState extends State<SearchBarApp> {
                                 ),
                               ),
                             ),
-                            // Padding(
-                            //   padding: const EdgeInsets.only(left: 0.0, right: 0.0, top: 25.0),
-                            //   child: Container(
-                            //     width: 55,
-                            //     height: 250.0,
-                            //     decoration: BoxDecoration(
-                            //       color: Theme.of(context).colorScheme.surface,
-                            //       shape: BoxShape.rectangle,
-                            //       borderRadius: const BorderRadius.all(Radius.circular(30)),
-                            //       boxShadow: [
-                            //         BoxShadow(
-                            //           color: Colors.black.withOpacity(0.2),
-                            //           spreadRadius: 0,
-                            //           blurRadius: 3,
-                            //           offset: const Offset(3, 4),
-                            //         ),
-                            //       ],
-                            //     ),
-                            //     child: Column(
-                            //       children: [
-                            //         const Spacer(),
-                            //         IconButton(
-                            //           icon: const Icon(Icons.add_alarm_rounded, color: Color(0xFF1E3643), size: 35.0),
-                            //           onPressed: () {},
-                            //         ),
-                            //         const Spacer(),
-                            //         IconButton(
-                            //           icon: const Icon(Icons.list_alt_rounded, color: Color(0xFF1E3643), size: 35.0),
-                            //           onPressed: () {},
-                            //         ),
-                            //         const Spacer(),
-                            //         IconButton(
-                            //           icon: const Icon(Icons.history_rounded, color: Color(0xFF1E3643), size: 35.0),
-                            //           onPressed: () {},
-                            //         ),
-                            //         const Spacer(),
-                            //       ],
-                            //     ),
-                            //   ),
-                            // ),
                           ],
                         ),
                       ),
