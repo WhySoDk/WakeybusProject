@@ -337,10 +337,6 @@ class _Penal extends State<Penal> {
                   ),
                 ),
               ),
-              Visibility(
-                visible: listOf,
-                  child: ListOfStop()
-              ),
             ]
         )
     );
@@ -362,13 +358,14 @@ class _ListOfStopState extends State<ListOfStop> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      width: 350,
+      height: 350,
       child: Align(
         alignment: Alignment.bottomCenter,
         child: Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 15),
           child: Container(
-            width: 350,
-            height: 333,
+
             decoration: BoxDecoration(
               color: Colors.white,
               boxShadow: const [
@@ -573,6 +570,33 @@ class _ListOfStopState extends State<ListOfStop> {
     );
   }
 }
+
+
+class Stopdetail extends StatelessWidget {
+  final String name;
+  const Stopdetail({super.key, required this.name});
+
+  @override
+  Widget build(BuildContext context) {
+    return DraggableScrollableSheet(
+        builder: (BuildContext context, ScrollController scrollController) {
+          return Container(
+            color: Colors.white,
+            child: ListView.builder(
+              controller: scrollController,
+              itemCount: 5,
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                  title: Text('Item $name'),
+                );
+              },
+            ),
+          );
+        }
+    );
+  }
+}
+
 
 class MapSample extends StatefulWidget {
   const MapSample({super.key});
