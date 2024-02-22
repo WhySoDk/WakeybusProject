@@ -317,62 +317,62 @@ class _Penal extends State<Penal> {
                           : Colors.black;
                       _iconButtonColor2 = Colors.black;
                       _iconButtonColor3 = Colors.black;
-                      showModalBottomSheet(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return DraggableScrollableSheet(
-                              builder: (BuildContext context,
-                                  ScrollController scrollcontroller) {
-                                return Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(30),
-                                      color: Colors.white,
-                                    ),
-                                    child: ListView.builder(
-                                        controller: scrollcontroller,
-                                        itemCount: 5,
-                                        itemBuilder:
-                                            (BuildContext context, int index) {
-                                          bool switchValue4 = true;
-                                          return Row(
-                                            children: [
-                                              Text('Item'),
-                                              Switch.adaptive(
-                                                value: switchValue4,
-                                                onChanged: (newValue) async {
-                                                  setState(() =>
-                                                      switchValue4 = newValue);
-                                                },
-                                                activeColor: Colors.white,
-                                                activeTrackColor:
-                                                    Color(0xFFB4D4FF),
-                                                inactiveTrackColor: Colors.grey,
-                                                inactiveThumbColor:
-                                                    Colors.white,
-                                              )
-                                            ],
-                                          );
-                                        }));
-                              },
-                            );
-                          });
                     });
                   },
                 ),
                 IconButton(
-                  icon: const Icon(Icons.add_chart, size: 35.0),
-                  color: _iconButtonColor2,
-                  onPressed: () {
-                    setState(() {
-                      listOf = !listOf;
-                      _iconButtonColor2 = _iconButtonColor2 == Colors.black
-                          ? Colors.orange
-                          : Colors.black;
-                      _iconButtonColor1 = Colors.black;
-                      _iconButtonColor3 = Colors.black;
-                    });
-                  },
-                ),
+                    icon: const Icon(Icons.add_chart, size: 35.0),
+                    color: _iconButtonColor2,
+                    onPressed: () {
+                      setState(() {
+                        listOf = !listOf;
+                        _iconButtonColor2 = _iconButtonColor2 == Colors.black
+                            ? Colors.orange
+                            : Colors.black;
+                        _iconButtonColor1 = Colors.black;
+                        _iconButtonColor3 = Colors.black;
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Container(
+                              height: 400,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30),
+                                  color: Colors.white,
+                                ),
+                                child: DraggableScrollableSheet(builder:
+                                    (BuildContext context,
+                                        ScrollController scrollController) {
+                                  return ListView.builder(
+                                      controller: scrollController,
+                                      itemCount: 5,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        bool switchValue4 = true;
+                                        return Row(
+                                          children: [
+                                            Text('Item'),
+                                            Switch.adaptive(
+                                              value: switchValue4,
+                                              onChanged: (newValue) async {
+                                                setState(() =>
+                                                    switchValue4 = newValue);
+                                              },
+                                              activeColor: Colors.white,
+                                              activeTrackColor:
+                                                  Color(0xFFB4D4FF),
+                                              inactiveTrackColor: Colors.grey,
+                                              inactiveThumbColor: Colors.white,
+                                            )
+                                          ],
+                                        );
+                                      });
+                                })
+                            );
+                          },
+                        );
+                      });
+                    }),
                 IconButton(
                   icon: const Icon(Icons.history, size: 35.0),
                   color: _iconButtonColor3,
