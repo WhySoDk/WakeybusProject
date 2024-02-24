@@ -285,7 +285,7 @@ class _Penal extends State<Penal> {
     return SizedBox(
         child: Stack(children: [
       Align(
-        alignment: const AlignmentDirectional(1, -0.5),
+        alignment: const AlignmentDirectional(1, -0.4),
         child: Padding(
           padding: const EdgeInsets.only(left: 0.0, right: 10.0, top: 5.0),
           child: Container(
@@ -312,11 +312,19 @@ class _Penal extends State<Penal> {
                   color: _iconButtonColor1,
                   onPressed: () {
                     setState(() {
-                      _iconButtonColor1 = _iconButtonColor1 == Colors.black
-                          ? Colors.orange
-                          : Colors.black;
-                      _iconButtonColor2 = Colors.black;
-                      _iconButtonColor3 = Colors.black;
+                      showModalBottomSheet(
+                          context: context,
+                          builder: (BuildContext context){
+                            return Container(
+                              height: 400,
+                                decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                color: Colors.white,
+                                ),
+                            )
+                              ;
+                        }
+                      );
                     });
                   },
                 ),
@@ -326,11 +334,6 @@ class _Penal extends State<Penal> {
                     onPressed: () {
                       setState(() {
                         listOf = !listOf;
-                        _iconButtonColor2 = _iconButtonColor2 == Colors.black
-                            ? Colors.orange
-                            : Colors.black;
-                        _iconButtonColor1 = Colors.black;
-                        _iconButtonColor3 = Colors.black;
                         showModalBottomSheet(
                           context: context,
                           builder: (BuildContext context) {
@@ -378,11 +381,6 @@ class _Penal extends State<Penal> {
                   color: _iconButtonColor3,
                   onPressed: () {
                     setState(() {
-                      _iconButtonColor3 = _iconButtonColor3 == Colors.black
-                          ? Colors.orange
-                          : Colors.black;
-                      _iconButtonColor1 = Colors.black;
-                      _iconButtonColor2 = Colors.black;
                     });
                   },
                 ),
