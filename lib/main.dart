@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'setting.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:settings_ui/settings_ui.dart';
@@ -22,47 +22,55 @@ class MyApp extends StatelessWidget {
         initialRoute: "/",
         routes: {
           "/": (context) => const MyHomePage(),
-          "/Setting": (context) => const Setting(
-                data: '',
-              ),
+          // "/Setting": (context) => const Setting(
+          //       data: '',
+          //     ),
+          '/setting': (context) => const Setting(),
+          '/language': (context) => const LanguagePage(),
+          '/notification': (context) => const NotificationPage(),
+          '/theme': (context) => const ThemePage(),
+          '/helpFeedback': (context) => const HelpFeedbackPage(),
+          '/aboutUs': (context) => const AboutUsPage(),
+          '/sound': (context) => const SoundPage(),
+          '/warningDistant': (context) => const WarningDistantPage(),
         });
   }
 }
 
-class Setting extends StatefulWidget {
-  const Setting({Key? key, required this.data}) : super(key: key);
-  final String data;
-  final String title = "Setting";
+// class Setting extends StatefulWidget {
+//   const Setting({Key? key, required this.data}) : super(key: key);
+//   final String data;
+//   final String title = "Setting";
 
-  @override
-  _SettingPageState createState() => _SettingPageState();
-}
+//   @override
+//   _SettingPageState createState() => _SettingPageState();
+// }
 
-class _SettingPageState extends State<Setting> {
-  @override
-  Widget build(BuildContext context) {
-    final String data = ModalRoute.of(context)!.settings.arguments as String;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: SettingsList(
-        sections: [
-          SettingsSection(
-            title: const Text('Section 1'),
-            tiles: [
-              SettingsTile(
-                title: Text("$data phichitphanphong"),
-                leading: const Icon(Icons.language),
-                onPressed: (BuildContext context) {},
-              )
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
+// class _SettingPageState extends State<Setting> {
+//   @override
+//   Widget build(BuildContext context) {
+//     final String data = ModalRoute.of(context)!.settings.arguments as String;
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text(widget.title),
+//       ),
+//       body: SettingsList(
+//         sections: [
+//           SettingsSection(
+//             title: const Text('Section 1'),
+//             tiles: [
+//               SettingsTile(
+//                 title: Text("$data phichitphanphong"),
+//                 leading: const Icon(Icons.language),
+//                 onPressed: (BuildContext context) {},
+//               )
+//             ],
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -137,8 +145,9 @@ class _SearchBarAppState extends State<SearchBarApp> {
                             }),
                           ),
                           onPressed: () {
-                            Navigator.pushNamed(context, "/Setting",
-                                arguments: 'Thanat');
+                            // Navigator.pushNamed(context, "/Setting",
+                            //     arguments: 'Thanat');
+                            Navigator.pushNamed(context, '/setting');
                           },
                           child: Icon(
                             Icons.settings,
@@ -242,8 +251,9 @@ class _SearchBarAppState extends State<SearchBarApp> {
                               ), // Background color
                             ),
                             onPressed: () {
-                              Navigator.pushNamed(context, "/Setting",
-                                  arguments: 'Thanat');
+                              // Navigator.pushNamed(context, "/Setting",
+                              //     arguments: 'Thanat');
+                              Navigator.pushNamed(context, '/setting');
                             },
                             child: const Icon(
                               Icons.pin_drop,
@@ -338,7 +348,7 @@ class _Penal extends State<Penal> {
                           context: context,
                           builder: (BuildContext context) {
                             return Container(
-                              height: 400,
+                                height: 400,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(30),
                                   color: Colors.white,
@@ -370,8 +380,7 @@ class _Penal extends State<Penal> {
                                           ],
                                         );
                                       });
-                                })
-                            );
+                                }));
                           },
                         );
                       });
