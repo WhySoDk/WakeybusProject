@@ -145,8 +145,9 @@ class _SearchBarAppState extends State<SearchBarApp> {
                             }),
                           ),
                           onPressed: () {
-                            Navigator.pushNamed(context, "/Setting",
-                                arguments: 'Thanat');
+                            // Navigator.pushNamed(context, "/Setting",
+                            //     arguments: 'Thanat');
+                            Navigator.pushNamed(context, '/setting');
                           },
                           child: Icon(
                             Icons.settings,
@@ -250,8 +251,9 @@ class _SearchBarAppState extends State<SearchBarApp> {
                               ), // Background color
                             ),
                             onPressed: () {
-                              Navigator.pushNamed(context, "/Setting",
-                                  arguments: 'Thanat');
+                              // Navigator.pushNamed(context, "/Setting",
+                              //     arguments: 'Thanat');
+                              Navigator.pushNamed(context, '/setting');
                             },
                             child: const Icon(
                               Icons.pin_drop,
@@ -343,7 +345,7 @@ class _Penal extends State<Penal> {
                           context: context,
                           builder: (BuildContext context) {
                             return Container(
-                              height: 400,
+                                height: 400,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(30),
                                   color: Colors.white,
@@ -375,8 +377,7 @@ class _Penal extends State<Penal> {
                                           ],
                                         );
                                       });
-                                })
-                            );
+                                }));
                           },
                         );
                       });
