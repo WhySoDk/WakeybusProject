@@ -50,7 +50,7 @@ class _Penal extends State<Penal> {
                           context: context,
                           builder: (BuildContext context) {
                             return Container(
-                              height: 360,
+                              height: 420,
                               width: 350,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(30),
@@ -118,6 +118,15 @@ class _Penal extends State<Penal> {
                                   radiusRange(),
                                   radiusRange(),
                                   radiusRange(),
+                                  Align(
+                                    alignment: Alignment.bottomRight,
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text("Save destination"),
+                                    ),
+                                  )
                                 ],
                               ),
                             );
