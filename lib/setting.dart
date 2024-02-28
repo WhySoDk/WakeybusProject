@@ -11,7 +11,7 @@ class LanguagePage extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.popAndPushNamed(context, '/setting');
+            Navigator.pop(context);
           },
         ),
       ),
