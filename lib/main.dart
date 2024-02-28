@@ -1,9 +1,10 @@
 import 'dart:async';
-import 'setting.dart';
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:settings_ui/settings_ui.dart';
+
 import 'penal.dart';
+import 'setting.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,9 +24,6 @@ class MyApp extends StatelessWidget {
         initialRoute: "/",
         routes: {
           "/": (context) => const MyHomePage(),
-          // "/Setting": (context) => const Setting(
-          //       data: '',
-          //     ),
           '/setting': (context) => const Setting(),
           '/language': (context) => const LanguagePage(),
           '/notification': (context) => const NotificationPage(),
@@ -37,41 +35,6 @@ class MyApp extends StatelessWidget {
         });
   }
 }
-
-// class Setting extends StatefulWidget {
-//   const Setting({Key? key, required this.data}) : super(key: key);
-//   final String data;
-//   final String title = "Setting";
-
-//   @override
-//   _SettingPageState createState() => _SettingPageState();
-// }
-
-// class _SettingPageState extends State<Setting> {
-//   @override
-//   Widget build(BuildContext context) {
-//     final String data = ModalRoute.of(context)!.settings.arguments as String;
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text(widget.title),
-//       ),
-//       body: SettingsList(
-//         sections: [
-//           SettingsSection(
-//             title: const Text('Section 1'),
-//             tiles: [
-//               SettingsTile(
-//                 title: Text("$data phichitphanphong"),
-//                 leading: const Icon(Icons.language),
-//                 onPressed: (BuildContext context) {},
-//               )
-//             ],
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -88,9 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           MapSample(),
           SearchBarApp(),
-          Penal(),
-          //StopDetail(),
-        ],
+        ]
       ),
     );
   }
@@ -114,8 +75,7 @@ class _SearchBarAppState extends State<SearchBarApp> {
             child: Scaffold(
               backgroundColor: Colors.transparent,
               body: Padding(
-                padding:
-                    const EdgeInsets.only(left: 15.0, right: 15.0, top: 0.0),
+                padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 0.0),
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   child: Row(
@@ -139,9 +99,7 @@ class _SearchBarAppState extends State<SearchBarApp> {
                           style: ButtonStyle(
                             padding: MaterialStateProperty.all(EdgeInsets.zero),
                             shape: MaterialStateProperty.all(CircleBorder()),
-                            backgroundColor:
-                                MaterialStateProperty.resolveWith<Color?>(
-                                    (Set<MaterialState> states) {
+                            backgroundColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
                               return const Color(0xFF1E3643); // Button color
                             }),
                           ),
@@ -159,31 +117,26 @@ class _SearchBarAppState extends State<SearchBarApp> {
                       ),
                       const Spacer(),
                       Padding(
-                        padding: const EdgeInsets.only(
-                            left: 15.0, right: 0.0, top: 0.0),
+                        padding: const EdgeInsets.only(left: 15.0, right: 0.0, top: 0.0),
                         child: SizedBox(
                           width: 300,
                           height: 50,
                           child: SearchAnchor(
-                            builder: (BuildContext context,
-                                SearchController controller) {
+                            builder: (BuildContext context, SearchController controller) {
                               return SearchBar(
                                 controller: controller,
                                 padding:
-                                    const MaterialStatePropertyAll<EdgeInsets>(
-                                        EdgeInsets.symmetric(horizontal: 16.0)),
+                                    const MaterialStatePropertyAll<EdgeInsets>(EdgeInsets.symmetric(horizontal: 16.0)),
                                 onTap: () {
                                   controller.openView();
                                 },
                                 onChanged: (_) {
                                   controller.openView();
                                 },
-                                leading:
-                                    const Icon(Icons.search), // Search Icon
+                                leading: const Icon(Icons.search), // Search Icon
                               );
                             },
-                            suggestionsBuilder: (BuildContext context,
-                                SearchController controller) {
+                            suggestionsBuilder: (BuildContext context, SearchController controller) {
                               return List<ListTile>.generate(
                                 5,
                                 (int index) {
@@ -213,17 +166,17 @@ class _SearchBarAppState extends State<SearchBarApp> {
           Align(
             alignment: Alignment.topRight,
             child: SizedBox(
-              height: 75.0,
+              height: 350,
               width: 75,
               child: Scaffold(
                 backgroundColor: Colors.transparent,
                 body: Padding(
-                  padding:
-                      const EdgeInsets.only(left: 0.0, right: 15.0, top: 15.0),
+                  padding: const EdgeInsets.only(left: 0.0, right: 15.0, top: 15.0),
                   child: Align(
                     alignment: Alignment.topRight,
                     child: Column(
                       children: [
+                        const Spacer(flex:1),
                         Container(
                           width: 45,
                           height: 45,
@@ -240,29 +193,24 @@ class _SearchBarAppState extends State<SearchBarApp> {
                           ),
                           child: ElevatedButton(
                             style: ButtonStyle(
-                              padding:
-                                  MaterialStateProperty.all(EdgeInsets.zero),
-                              shape: MaterialStateProperty.all(
-                                  const CircleBorder()),
-                              backgroundColor:
-                                  MaterialStateProperty.resolveWith<Color?>(
+                              padding: MaterialStateProperty.all(EdgeInsets.zero),
+                              shape: MaterialStateProperty.all(const CircleBorder()),
+                              backgroundColor: MaterialStateProperty.resolveWith<Color?>(
                                 (Set<MaterialState> states) {
                                   return Theme.of(context).colorScheme.surface;
                                 },
                               ), // Background color
                             ),
-                            onPressed: () {
-                              // Navigator.pushNamed(context, "/Setting",
-                              //     arguments: 'Thanat');
-                              Navigator.pushNamed(context, '/setting');
-                            },
+                            onPressed: () {},
                             child: const Icon(
-                              Icons.pin_drop,
+                              Icons.my_location_sharp,
                               color: Color(0xFF1E3643),
                               size: 25.0,
                             ),
                           ),
                         ),
+                        const Spacer(flex:1),
+                        Penal()
                       ],
                     ),
                   ),
@@ -277,8 +225,6 @@ class _SearchBarAppState extends State<SearchBarApp> {
   }
 }
 
-
-
 class MapSample extends StatefulWidget {
   const MapSample({super.key});
 
@@ -287,8 +233,7 @@ class MapSample extends StatefulWidget {
 }
 
 class MapSampleState extends State<MapSample> {
-  final Completer<GoogleMapController> _controller =
-      Completer<GoogleMapController>();
+  final Completer<GoogleMapController> _controller = Completer<GoogleMapController>();
 
   static const CameraPosition MUICT = CameraPosition(
     target: LatLng(13.79465063169504, 100.3247490794993),
