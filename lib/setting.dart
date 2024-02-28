@@ -11,7 +11,7 @@ class LanguagePage extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.popAndPushNamed(context, '/setting');
+            Navigator.pop(context);
           },
         ),
       ),
@@ -39,7 +39,7 @@ class NotificationPage extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.popAndPushNamed(context, '/setting');
+            Navigator.pop(context);
           },
         ),
       ),
@@ -76,7 +76,7 @@ class SoundPage extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.popAndPushNamed(context, '/notification');
+            Navigator.pop(context);
           },
         ),
       ),
@@ -105,7 +105,7 @@ class WarningDistantPage extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.popAndPushNamed(context, '/notification');
+            Navigator.pop(context);
           },
         ),
       ),
@@ -137,7 +137,7 @@ class ThemePage extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.popAndPushNamed(context, '/setting');
+            Navigator.pop(context);
           },
         ),
       ),
@@ -165,7 +165,7 @@ class HelpFeedbackPage extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.popAndPushNamed(context, '/setting');
+            Navigator.pop(context);
           },
         ),
       ),
@@ -212,7 +212,7 @@ class AboutUsPage extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.popAndPushNamed(context, '/setting');
+            Navigator.pop(context);
           },
         ),
       ),
@@ -236,12 +236,12 @@ class Setting extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: Colors.white,
-        title: const Center(
-            child: Text(
+        title: const Text(
           'Setting',
           style: TextStyle(fontSize: 40),
-        )),
+        ),
       ),
       body: ListView(
         children: [
@@ -277,13 +277,9 @@ Widget w(String title, BuildContext context, String link) {
     title: Row(children: [
       Text(title),
       const Spacer(),
-      const Text(
-        ">",
-        style: TextStyle(color: Color.fromARGB(255, 0, 153, 255)),
-      )
+      const Icon(Icons.arrow_forward_ios_sharp, color: Color.fromARGB(255, 0, 153, 255))
     ]),
     onTap: () {
-      Navigator.pop(context);
       Navigator.pushNamed(context, '/$link');
     },
   );

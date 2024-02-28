@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class Penal extends StatefulWidget {
   const Penal({super.key});
@@ -53,74 +51,9 @@ class _Penal extends State<Penal> {
                           builder: (BuildContext context) {
                             return Container(
                               height: 400,
-                              width: 350,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(30),
                                 color: Colors.white,
-                              ),
-                              child:   Column(
-                                children: [
-                                  const Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 30.0),
-                                    child: TextField(
-                                      decoration: InputDecoration(
-                                        hintText: "Enter Stop name here"
-                                      ),
-                                      ),
-                                    ),
-                                  Padding(
-                                      padding: EdgeInsets.symmetric(horizontal: 30.0,vertical: 10),
-                                  child: Row(
-                                    children: [
-                                      const Expanded(
-                                          child: Text("Alarm Sound" ,style: TextStyle(fontSize: 16),)),
-                                      const SizedBox(
-                                        width: 150,
-                                      ),
-                                      Container(
-                                        height: 30,
-                                        width: 2,
-                                        color: Colors.grey,
-                                      ),
-                                      const Expanded(
-                                          child: naviSwitch())
-                                    ],
-                                  ),
-                                  ),
-                                  Container(
-                                    height: 1,
-                                    width: 300,
-                                    color: Colors.grey,
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 30.0,vertical: 10),
-                                    child: Row(
-                                      children: [
-                                        const Expanded(
-                                            child: Text("Vibration",style: TextStyle(fontSize: 16),)),
-                                        const SizedBox(
-                                          width: 150,
-                                        ),
-                                        Container(
-                                          height: 30,
-                                          width: 2,
-                                          color: Colors.grey,
-                                        ),
-                                        const Expanded(
-                                            child: naviSwitch())
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    height: 1,
-                                    width: 300,
-                                    color: Colors.grey,
-                                  ),
-                                  const Text("Radius"),
-                                  radiusRange(),
-                                  radiusRange(),
-                                  radiusRange(),
-                                ],
                               ),
                             );
                           });
@@ -145,7 +78,7 @@ class _Penal extends State<Penal> {
                                     child: DraggableScrollableSheet(
                                         initialChildSize: 0.8,
                                         minChildSize: 0.8,
-                                        maxChildSize: 0.82,
+                                        maxChildSize: 1,
                                         builder: (context,
                                             ScrollController scrollController) {
                                           return ListView.builder(
@@ -214,33 +147,5 @@ class _naviSwitchState extends State<naviSwitch> {
       inactiveTrackColor: Colors.grey,
       inactiveThumbColor: Colors.white,
     );
-  }
-}
-
-
-class radiusRange extends StatefulWidget {
-  radiusRange({super.key});
-
-  @override
-  State<radiusRange> createState() => _radiusRangeState();
-}
-
-class _radiusRangeState extends State<radiusRange> {
-  double _currentSlideValue  = 5;
-  @override
-  Widget build(BuildContext context) {
-    return Slider(
-        value: _currentSlideValue,
-        min: 1,
-        max: 10,
-        divisions: 10,
-        activeColor: Colors.blueAccent,
-        label: _currentSlideValue.round().toString(),
-        onChanged: (double value){
-          setState(() {
-            _currentSlideValue = value;
-          });
-        }
-        );
   }
 }
