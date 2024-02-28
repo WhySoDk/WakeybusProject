@@ -277,10 +277,7 @@ Widget w(String title, BuildContext context, String link) {
     title: Row(children: [
       Text(title),
       const Spacer(),
-      const Text(
-        ">",
-        style: TextStyle(color: Color.fromARGB(255, 0, 153, 255)),
-      )
+      const Icon(Icons.arrow_forward_ios_sharp, color: Color.fromARGB(255, 0, 153, 255))
     ]),
     onTap: () {
       Navigator.pop(context);
