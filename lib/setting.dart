@@ -236,12 +236,12 @@ class Setting extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: Colors.white,
-        title: const Center(
-            child: Text(
+        title: const Text(
           'Setting',
           style: TextStyle(fontSize: 40),
-        )),
+        ),
       ),
       body: ListView(
         children: [
