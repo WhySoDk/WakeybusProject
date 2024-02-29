@@ -14,15 +14,13 @@ class _Penal extends State<Penal> {
   bool listOf = false;
   Color _iconButtonColor3 = Colors.black;
   bool history = false;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        child: Stack(children: [
-      Align(
-        alignment: const AlignmentDirectional(1, -0.4),
-        child: Padding(
-          padding: const EdgeInsets.only(left: 0.0, right: 10.0, top: 5.0),
-          child: Container(
+      child: Stack(
+        children: [
+          Container(
             width: 55,
             height: 250,
             decoration: BoxDecoration(
@@ -56,22 +54,23 @@ class _Penal extends State<Penal> {
                                 borderRadius: BorderRadius.circular(30),
                                 color: Colors.white,
                               ),
-                              child:   Column(
+                              child: Column(
                                 children: [
                                   const Padding(
                                     padding: EdgeInsets.symmetric(horizontal: 30.0),
                                     child: TextField(
-                                      decoration: InputDecoration(
-                                          hintText: "Enter Stop name here"
-                                      ),
+                                      decoration: InputDecoration(hintText: "Enter Stop name here"),
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 30.0,vertical: 10),
+                                    padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 10),
                                     child: Row(
                                       children: [
                                         const Expanded(
-                                            child: Text("Alarm Sound" ,style: TextStyle(fontSize: 16),)),
+                                            child: Text(
+                                          "Alarm Sound",
+                                          style: TextStyle(fontSize: 16),
+                                        )),
                                         const SizedBox(
                                           width: 150,
                                         ),
@@ -80,8 +79,7 @@ class _Penal extends State<Penal> {
                                           width: 2,
                                           color: Colors.grey,
                                         ),
-                                        const Expanded(
-                                            child: naviSwitch())
+                                        const Expanded(child: naviSwitch())
                                       ],
                                     ),
                                   ),
@@ -91,11 +89,14 @@ class _Penal extends State<Penal> {
                                     color: Colors.grey,
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 30.0,vertical: 10),
+                                    padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 10),
                                     child: Row(
                                       children: [
                                         const Expanded(
-                                            child: Text("Vibration",style: TextStyle(fontSize: 16),)),
+                                            child: Text(
+                                          "Vibration",
+                                          style: TextStyle(fontSize: 16),
+                                        )),
                                         const SizedBox(
                                           width: 150,
                                         ),
@@ -104,8 +105,7 @@ class _Penal extends State<Penal> {
                                           width: 2,
                                           color: Colors.grey,
                                         ),
-                                        const Expanded(
-                                            child: naviSwitch())
+                                        const Expanded(child: naviSwitch())
                                       ],
                                     ),
                                   ),
@@ -153,14 +153,11 @@ class _Penal extends State<Penal> {
                                         initialChildSize: 0.8,
                                         minChildSize: 0.8,
                                         maxChildSize: 1,
-                                        builder: (context,
-                                            ScrollController scrollController) {
+                                        builder: (context, ScrollController scrollController) {
                                           return ListView.builder(
                                               controller: scrollController,
                                               itemCount: 10,
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                      int index) {
+                                              itemBuilder: (BuildContext context, int index) {
                                                 return Container(
                                                   child: const Row(
                                                     children: [
@@ -169,10 +166,8 @@ class _Penal extends State<Penal> {
                                                           Icons.bus_alert,
                                                         ),
                                                       ),
-                                                      Expanded(
-                                                          child: Text('Item')),
-                                                      Expanded(
-                                                          child: naviSwitch()),
+                                                      Expanded(child: Text('Item')),
+                                                      Expanded(child: naviSwitch()),
                                                     ],
                                                   ),
                                                 );
@@ -194,9 +189,9 @@ class _Penal extends State<Penal> {
               ],
             ),
           ),
-        ),
+        ],
       ),
-    ]));
+    );
   }
 }
 
@@ -209,6 +204,7 @@ class naviSwitch extends StatefulWidget {
 
 class _naviSwitchState extends State<naviSwitch> {
   bool switchValue = true;
+
   @override
   Widget build(BuildContext context) {
     return Switch.adaptive(
@@ -224,7 +220,6 @@ class _naviSwitchState extends State<naviSwitch> {
   }
 }
 
-
 class radiusRange extends StatefulWidget {
   radiusRange({super.key});
 
@@ -233,7 +228,8 @@ class radiusRange extends StatefulWidget {
 }
 
 class _radiusRangeState extends State<radiusRange> {
-  double _currentSlideValue  = 5;
+  double _currentSlideValue = 5;
+
   @override
   Widget build(BuildContext context) {
     return Slider(
@@ -243,11 +239,10 @@ class _radiusRangeState extends State<radiusRange> {
         divisions: 10,
         activeColor: Colors.blueAccent,
         label: _currentSlideValue.round().toString(),
-        onChanged: (double value){
+        onChanged: (double value) {
           setState(() {
             _currentSlideValue = value;
           });
-        }
-    );
+        });
   }
 }
