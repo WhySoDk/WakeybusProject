@@ -7,7 +7,8 @@ class LanguagePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings'),
+        centerTitle: true,
+        title: const Text('Language'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -36,6 +37,7 @@ class NotificationPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Notification'),
+        centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -72,7 +74,8 @@ class SoundPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Notification'),
+        title: const Text('Sound'),
+        centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -102,6 +105,7 @@ class WarningDistantPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Warning distant'),
+        centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -133,7 +137,8 @@ class ThemePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings'),
+        title: const Text('Theme'),
+        centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -162,6 +167,7 @@ class HelpFeedbackPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('How can we help?'),
+        centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -208,7 +214,8 @@ class AboutUsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings'),
+        title: const Text('About US'),
+        centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -277,7 +284,8 @@ Widget w(String title, BuildContext context, String link) {
     title: Row(children: [
       Text(title),
       const Spacer(),
-      const Icon(Icons.arrow_forward_ios_sharp, color: Color.fromARGB(255, 0, 153, 255))
+      const Icon(Icons.arrow_forward_ios_sharp,
+          color: Color.fromARGB(255, 0, 153, 255))
     ]),
     onTap: () {
       Navigator.pushNamed(context, '/$link');
