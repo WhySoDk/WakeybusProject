@@ -152,7 +152,7 @@ class _Penal extends State<Penal> {
                                     child: DraggableScrollableSheet(
                                         initialChildSize: 0.8,
                                         minChildSize: 0.8,
-                                        maxChildSize: 0.85,
+                                        maxChildSize: 1,
                                         builder: (context,
                                             ScrollController scrollController) {
                                           return ListView.builder(
@@ -188,52 +188,7 @@ class _Penal extends State<Penal> {
                   icon: const Icon(Icons.history, size: 35.0),
                   color: _iconButtonColor3,
                   onPressed: () {
-                    setState(() {
-                      showModalBottomSheet(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return Column(
-                              children: [
-                                Text("List History"),
-                                SizedBox(
-                                  height: 300,
-                                  width: 350,
-                                  child: DraggableScrollableSheet(
-                                      initialChildSize: 0.8,
-                                      minChildSize: 0.8,
-                                      maxChildSize: 0.85,
-                                      builder: (context,
-                                          ScrollController scrollController) {
-                                        return ListView.builder(
-                                            controller: scrollController,
-                                            itemCount: 10,
-                                            itemBuilder:
-                                                (BuildContext context,
-                                                int index) {
-                                              return Container(
-                                                height: 50,
-                                                child: const Row(
-                                                  children: [
-                                                    Expanded(
-                                                      child: Icon(
-                                                        Icons.bus_alert,
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                        child: Text('Item')),
-
-                                                    Expanded(
-                                                        child: Text('11/11/2022')),
-                                                  ],
-                                                ),
-                                              );
-                                            });
-                                      }),
-                                ),
-                              ],
-                            );
-                          });
-                    });
+                    setState(() {});
                   },
                 ),
               ],
