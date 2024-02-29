@@ -37,6 +37,7 @@ class NotificationPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Notification'),
+        centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
