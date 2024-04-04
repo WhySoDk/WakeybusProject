@@ -13,6 +13,8 @@ class Penal extends StatefulWidget {
 }
 
 class _Penal extends State<Penal> {
+  final CollectionReference _collection = FirebaseFirestore.instance.collection('stoplist');
+  final TextEditingController _dataController = TextEditingController();
   Color _iconButtonColor1 = Colors.black;
   Color _iconButtonColor3 = Colors.black;
 
@@ -67,11 +69,12 @@ class _Penal extends State<Penal> {
                                   ),
                                   child:   Column(
                                     children: [
-                                      const Padding(
-                                        padding: EdgeInsets.symmetric(horizontal: 30.0),
+                                       Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 30.0),
                                         child: TextField(
-                                          decoration: InputDecoration(
-                                              hintText: "Enter Stop name here"
+                                          controller: _dataController,
+                                          decoration: const InputDecoration(
+                                            labelText: 'Enter Name of destination',
                                           ),
                                         ),
                                       ),
@@ -131,6 +134,7 @@ class _Penal extends State<Penal> {
                                         alignment: Alignment.bottomRight,
                                         child: ElevatedButton(
                                           onPressed: () {
+                                            addDataToFirestore(_dataController.text);
                                             Navigator.pop(context);
                                           },
                                           child: const Text("Save destination"),
@@ -181,7 +185,7 @@ class _Penal extends State<Penal> {
                                                 itemBuilder: (context, index) {
                                                   return ListTile(
                                                     title: Text(snapshot.data?.docs[index]["Name"]),
-                                                    subtitle: Text(snapshot.data?.docs[index]["date"]),
+                                                    subtitle: Text(snapshot.data!.docs[index]["date"].toDate().toString()),
                                                   );
                                                 },
                                               );
@@ -203,7 +207,28 @@ class _Penal extends State<Penal> {
           ),
         ]));
   }
+  void addDataToFirestore(String newData) {
+    _collection.add({'Name': newData});
+    _collection.add({'date': "April 4, 2024 at 12:00:00AM UTC+7"}).then((_) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Data added successfully')),
+      );
+      _dataController.clear(); // Clear text field after adding data
+    }).catchError((error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to add data: $error')),
+      );
+    });
+  }
+
+  @override
+  void dispose() {
+    _dataController.dispose();
+    super.dispose();
+  }
 }
+
+
 
 class naviSwitch extends StatefulWidget {
   const naviSwitch({super.key});
@@ -257,4 +282,5 @@ class _radiusRangeState extends State<radiusRange> {
     );
   }
 }
+
 
