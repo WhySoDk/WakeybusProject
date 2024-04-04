@@ -1,30 +1,28 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-
-import 'setting.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'firebase_options.dart';
 
 class Penal extends StatefulWidget {
   const Penal({super.key});
-
-
   @override
   State<Penal> createState() => _Penal();
 }
 
 class _Penal extends State<Penal> {
   Color _iconButtonColor1 = Colors.black;
-  bool pinning = false;
-  Color _iconButtonColor2 = Colors.black;
-  bool listOf = false;
   Color _iconButtonColor3 = Colors.black;
-  bool history = false;
+
+  Future<void> initializeFirebase() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -35,7 +33,7 @@ class _Penal extends State<Penal> {
               padding: const EdgeInsets.only(left: 0.0, right: 10.0, top: 5.0),
               child: Container(
                 width: 55,
-                height: 250,
+                height: 150,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   boxShadow: const [
@@ -146,56 +144,6 @@ class _Penal extends State<Penal> {
                       },
                     ),
                     IconButton(
-                        icon: const Icon(Icons.add_chart, size: 35.0),
-                        color: _iconButtonColor2,
-                        onPressed: () {
-                          setState(() {
-                            listOf = !listOf;
-                            showModalBottomSheet(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return Column(
-                                    children: [
-                                      Text("Stop List"),
-                                      SizedBox(
-                                        height: 300,
-                                        width: 350,
-                                        child: DraggableScrollableSheet(
-                                            initialChildSize: 0.8,
-                                            minChildSize: 0.8,
-                                            maxChildSize: 1,
-                                            builder: (context,
-                                                ScrollController scrollController) {
-                                              return ListView.builder(
-                                                  controller: scrollController,
-                                                  itemCount: 10,
-                                                  itemBuilder:
-                                                      (BuildContext context,
-                                                      int index) {
-                                                    return Container(
-                                                      child: const Row(
-                                                        children: [
-                                                          Expanded(
-                                                            child: Icon(
-                                                              Icons.bus_alert,
-                                                            ),
-                                                          ),
-                                                          Expanded(
-                                                              child: Text('Item')),
-                                                          Expanded(
-                                                              child: naviSwitch()),
-                                                        ],
-                                                      ),
-                                                    );
-                                                  });
-                                            }),
-                                      ),
-                                    ],
-                                  );
-                                });
-                          });
-                        }),
-                    IconButton(
                       icon: const Icon(Icons.history, size: 35.0),
                       color: _iconButtonColor3,
                       onPressed: () {
@@ -204,35 +152,46 @@ class _Penal extends State<Penal> {
                               context: context,
                               builder: (BuildContext context) {
                                 return StreamBuilder(
-                                    stream: FirebaseFirestore.instance.collection("stoplist").snapshots(),
-                                    builder: (context, snapshot){
-                                      return Column(
-                                        children: [
-                                          Text("Stop List"),
-                                          SizedBox(
-                                            height: 300,
-                                            width: 350,
-                                            child: DraggableScrollableSheet(
-                                                initialChildSize: 0.8,
-                                                minChildSize: 0.8,
-                                                maxChildSize: 1,
-                                                builder: (context,
-                                                    ScrollController scrollController) {
-                                                  return ListView.builder(
-                                                    scrollDirection: Axis.vertical,
-                                                    itemCount: snapshot.data?.docs.length,
-                                                    itemBuilder: (context, index) {
-                                                      return ListTile(
-                                                          title: Text(snapshot.data?.docs[index]["Name"]),
-                                                          subtitle: Text(snapshot.data?.docs[index]["date"])
-                                                      );
-                                                    },
+                                  stream: FirebaseFirestore.instance.collection("stoplist").snapshots(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.connectionState == ConnectionState.waiting) {
+                                      return CircularProgressIndicator(); // Show loading indicator while waiting for data
+                                    }
+                                    if (snapshot.hasError) {
+                                      return Text('Error: ${snapshot.error}');
+                                    }
+                                    if (!snapshot.hasData) {
+                                      return Text('No data available'); // Handle case where no data is available
+                                    }
+                                    // Now you can safely access the data
+                                    return Column(
+                                      children: [
+                                        Text("Stop List"),
+                                        SizedBox(
+                                          height: 300,
+                                          width: 350,
+                                          child: DraggableScrollableSheet(
+                                            initialChildSize: 0.8,
+                                            minChildSize: 0.8,
+                                            maxChildSize: 1,
+                                            builder: (context, ScrollController scrollController) {
+                                              return ListView.builder(
+                                                scrollDirection: Axis.vertical,
+                                                itemCount: snapshot.data?.docs.length,
+                                                itemBuilder: (context, index) {
+                                                  return ListTile(
+                                                    title: Text(snapshot.data?.docs[index]["Name"]),
+                                                    subtitle: Text(snapshot.data?.docs[index]["date"]),
                                                   );
-                                                }),
+                                                },
+                                              );
+                                            },
                                           ),
-                                        ],
-                                      );
-                                    });
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
                               });
                         });
                       },
