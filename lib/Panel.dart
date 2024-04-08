@@ -17,6 +17,9 @@ class _Penal extends State<Penal> {
   final TextEditingController _dataController = TextEditingController();
   Color _iconButtonColor1 = Colors.black;
   Color _iconButtonColor3 = Colors.black;
+  double selectedRadius1 = 1; // Define a variable to store the selected radius value
+  double selectedRadius2 = 2; // Define a variable to store the selected radius value
+  double selectedRadius3 = 3; // Define a variable to store the selected radius value
 
   Future<void> initializeFirebase() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -127,14 +130,24 @@ class _Penal extends State<Penal> {
                                         color: Colors.grey,
                                       ),
                                       const Text("Radius"),
-                                      radiusRange(),
-                                      radiusRange(),
-                                      radiusRange(),
+                                      radiusRange(initialValue: 1,
+                                      onChanged: (value){
+                                        selectedRadius1 = value;
+                                      },),
+                                      radiusRange(initialValue: 2,
+                                        onChanged: (value){
+                                          selectedRadius2 = value;
+                                        },),
+                                      radiusRange(initialValue: 3,
+                                        onChanged: (value){
+                                          selectedRadius3 = value;
+                                        },),
                                       Align(
                                         alignment: Alignment.bottomRight,
                                         child: ElevatedButton(
                                           onPressed: () {
-                                            addDataToFirestore(_dataController.text);
+                                            addDataToFirestore(_dataController.text,
+                                            false,true,);
                                             Navigator.pop(context);
                                           },
                                           child: const Text("Save destination"),
@@ -185,7 +198,7 @@ class _Penal extends State<Penal> {
                                                 itemBuilder: (context, index) {
                                                   return ListTile(
                                                     title: Text(snapshot.data?.docs[index]["Name"]),
-                                                    subtitle: Text(snapshot.data!.docs[index]["date"].toDate().toString()),
+                                                    subtitle: Text(snapshot.data!.docs[index]["Date"].toDate().toString()),
                                                   );
                                                 },
                                               );
@@ -207,9 +220,16 @@ class _Penal extends State<Penal> {
           ),
         ]));
   }
-  void addDataToFirestore(String newData) {
-    _collection.add({'Name': newData});
-    _collection.add({'date': "April 4, 2024 at 12:00:00AM UTC+7"}).then((_) {
+  void addDataToFirestore(String name, bool alarmSound, bool vibration) {
+    _collection.add({
+      'Name': name,
+      'AlarmSound': alarmSound,
+      'Vibration': vibration,
+      'Radius1': selectedRadius1,
+      'Radius2': selectedRadius2,
+      'Radius3': selectedRadius3,
+      'Date': Timestamp.now(), // Current date and time
+    }).then((_) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Data added successfully')),
       );
@@ -257,27 +277,37 @@ class _naviSwitchState extends State<naviSwitch> {
 
 
 class radiusRange extends StatefulWidget {
-  radiusRange({super.key});
+  final double initialValue;
+  final void Function(double) onChanged;
+  radiusRange({super.key, required this.initialValue, required this.onChanged});
 
   @override
   State<radiusRange> createState() => _radiusRangeState();
 }
 
 class _radiusRangeState extends State<radiusRange> {
-  double _currentSlideValue  = 5;
+  double _currentSlideValue  = 1;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentSlideValue = widget.initialValue;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Slider(
         value: _currentSlideValue,
         min: 1,
-        max: 10,
-        divisions: 10,
+        max: 6,
+        divisions: 6,
         activeColor: Colors.blueAccent,
         label: _currentSlideValue.round().toString(),
         onChanged: (double value){
           setState(() {
             _currentSlideValue = value;
           });
+          widget.onChanged(value); // Pass the selected value to the callback function
         }
     );
   }
